@@ -24,7 +24,7 @@ class UtilisateurController extends AbstractController
         $this->security = $security;
     }
 
-    #[Route('/user', name: 'user_infos', methods: ['GET'])]
+    #[Route('/api/user', name: 'user_infos', methods: ['GET'])]
     public function getUserInfo(LoggerInterface $logger)
     {
         $user = $this->security->getUser();
@@ -56,7 +56,7 @@ class UtilisateurController extends AbstractController
         }
     }
 
-    #[Route('/user/roles', name: 'user_roles', methods: ['GET'])]
+    #[Route('/api/user/roles', name: 'user_roles', methods: ['GET'])]
     public function getUserRoles(Security $security): JsonResponse
     {
         // Récupère l'utilisateur authentifié
@@ -74,7 +74,7 @@ class UtilisateurController extends AbstractController
     }
 
     // Route API pour créer un utilisateur avec un pseudo passé dans l'URL
-    #[Route('/users/{pseudo}', name: 'api_user_create', methods: ['POST'])]
+    #[Route('/api/users/{pseudo}', name: 'api_user_create', methods: ['POST'])]
     public function createUser(string $pseudo, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): JsonResponse
     {
         if (empty($pseudo)) {

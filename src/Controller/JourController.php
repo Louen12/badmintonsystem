@@ -13,7 +13,7 @@ class JourController extends AbstractController
 {
 
     // Route API pour récupérer la liste des jours
-    #[Route('/jours', name: 'api_jour_list', methods: ['GET'])]
+    #[Route('/api/jours', name: 'api_jour_list', methods: ['GET'])]
     public function list(JourRepository $jourRepository): JsonResponse
     {
         $jours = $jourRepository->findAll();

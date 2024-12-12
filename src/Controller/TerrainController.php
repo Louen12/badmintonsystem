@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class TerrainController extends AbstractController
 {
-    #[Route('/terrains', name: 'api_terrain_list', methods: ['GET'])]
+    #[Route('/api/terrains', name: 'api_terrain_list', methods: ['GET'])]
     public function index(TerrainRepository $repository, SerializerInterface $serializer): JsonResponse
     {
         $terrains = $repository->findAll();
@@ -33,7 +33,7 @@ class TerrainController extends AbstractController
         return new JsonResponse($terrainsData, JsonResponse::HTTP_OK);
     }
 
-    #[Route('/terrains/disponible', name: 'api_terrain_list_disponible', methods: ['GET'])]
+    #[Route('/api/terrains/disponible', name: 'api_terrain_list_disponible', methods: ['GET'])]
     public function terrainsActifs(TerrainRepository $repository): JsonResponse
     {
         // Récupère tous les terrains actifs
@@ -53,7 +53,7 @@ class TerrainController extends AbstractController
         return new JsonResponse($terrainsData, JsonResponse::HTTP_OK);
     }
 
-    #[Route('/terrain/disponible/{id}', name: 'app_terrain_disponible', methods: ['PATCH'])]
+    #[Route('/api/terrain/disponible/{id}', name: 'app_terrain_disponible', methods: ['PATCH'])]
     public function rendreDisponible(
         int $id,
         TerrainRepository $repository,
@@ -77,7 +77,7 @@ class TerrainController extends AbstractController
     }
 
 
-    #[Route('/terrain/indisponible/{id}', name: 'api_terrain_indisponible', methods: ['PATCH'])]
+    #[Route('/api/terrain/indisponible/{id}', name: 'api_terrain_indisponible', methods: ['PATCH'])]
     public function rendreIndisponible(
         int $id,
         TerrainRepository $repository,

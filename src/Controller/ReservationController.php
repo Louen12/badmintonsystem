@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
 {
-    #[Route('/reservations/{id}', name: 'api_reservation_by_id', methods: ['GET'])]
+    #[Route('/api/reservations/{id}', name: 'api_reservation_by_id', methods: ['GET'])]
     public function getReservationById(
         int $id,
         ReservationRepository $reservationRepository
@@ -42,7 +42,7 @@ class ReservationController extends AbstractController
         return new JsonResponse($reservationData, Response::HTTP_OK);
     }
 
-    #[Route('/reservations', name: 'api_reservation_create', methods: ['POST'])]
+    #[Route('/api/reservations', name: 'api_reservation_create', methods: ['POST'])]
     public function createReservation(
         Request $request,
         EntityManagerInterface $entityManager,

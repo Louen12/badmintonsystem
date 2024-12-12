@@ -64,67 +64,67 @@
 ### Cas nominal d'utilisation
 - **Lister les jours disponibles** :
   ```bash
-  curl -X GET http://localhost:8000/jours
+  curl -X GET http://localhost:8000/api/jours
   ```
 - **Créer un utilisateur** :
   ```bash
-  curl -X POST http://localhost:8000/users/{pseudo}
+  curl -X POST http://localhost:8000/api/users/{pseudo}
   ```
   Remplacez `{pseudo}` par le pseudo souhaité.
 
 - **Lister les créneaux horaires disponibles** :
   ```bash
-  curl -X GET http://localhost:8000/creneaux/horaire
+  curl -X GET http://localhost:8000/api/creneaux/horaire
   ```
 
 - **Afficher les créneaux pour un jour spécifique** :
   ```bash
-  curl -X GET http://localhost:8000/creneaux/{jour}
+  curl -X GET http://localhost:8000/api/creneaux/{jour}
   ```
   Remplacez `{jour}` par le jour souhaité (ex : lundi, mardi, etc.).
 
 - **Récupérer une réservation par ID** :
   ```bash
-  curl -X GET http://localhost:8000/reservations/{id}
+  curl -X GET http://localhost:8000/api/reservations/{id}
   ```
   Remplacez `{id}` par l'ID de la réservation.
 
 - **Créer une nouvelle réservation** :
   ```bash
-  curl -X POST http://localhost:8000/reservations -d '{"pseudo": "{pseudo}", "terrain": "{terrain}", "jour": "{jour}", "creneau": "{creneau}"}' -H "Content-Type: application/json"
+  curl -X POST http://localhost:8000/api/reservations -d '{"pseudo": "{pseudo}", "terrain": "{terrain}", "jour": "{jour}", "creneau": "{creneau}"}' -H "Content-Type: application/json"
   ```
   Remplacez `{pseudo}`, `{terrain}`, `{jour}`, `{creneau}` par les valeurs souhaitées.
 
 - **Lister toutes les réservations** :
   ```bash
-  curl -X GET http://localhost:8000/reservations
+  curl -X GET http://localhost:8000/api/reservations
   ```
 
 - **Lister les terrains disponibles** :
   ```bash
-  curl -X GET http://localhost:8000/terrains
+  curl -X GET http://localhost:8000/api/terrains
   ```
 
 - **Lister les terrains actifs** :
   ```bash
-  curl -X GET http://localhost:8000/terrains/disponible
+  curl -X GET http://localhost:8000/api/terrains/disponible
   ```
   
 - **Rendre un terrain disponible (actif)** :
   ```bash
-  curl -X PATCH http://localhost:8000/terrain/disponible/{id}
+  curl -X PATCH http://localhost:8000/api/terrain/disponible/{id}
   ```
   Remplacez `{id}` par l'ID du terrain.
 
 - **Rendre un terrain indisponible (inactif)** :
   ```bash
-  curl -X PATCH http://localhost:8000/terrain/indisponible/{id}
+  curl -X PATCH http://localhost:8000/api/terrain/indisponible/{id}
   ```
   Remplacez `{id}` par l'ID du terrain.
 
 - **Récupérer les informations de l'utilisateur authentifié** :
   ```bash
-  curl -X GET http://localhost:8000/user
+  curl -X GET http://localhost:8000/api/user
   ```
   Problème de token : ne fonctionne pas
 
@@ -160,17 +160,17 @@
 ### Tableau récapitulatif des ressources
 | Route                                      | Méthode HTTP | Description                                                              | Paramètres requis                                     | Réponse                                      |
 |--------------------------------------------|--------------|--------------------------------------------------------------------------|-------------------------------------------------------|----------------------------------------------|
-| **/jours**                                 | GET          | Liste tous les jours disponibles.                                         | Aucun                                                 | JSON : Liste des jours avec `id` et `jour`    |
-| **/reservations/{id}**                     | GET          | Récupère une réservation par ID.                                          | `id` (ID de la réservation)                           | JSON : Détails de la réservation avec `id`, `utilisateur`, `terrain`, `jour`, `creneau` |
-| **/reservations**                          | POST         | Crée une nouvelle réservation.                                            | `pseudo`, `terrain`, `jour`, `creneau` (données JSON) | JSON : Message de confirmation ou d'erreur     |
-| **/reservations**                          | GET          | Liste toutes les réservations, avec possibilité de filtrer par `pseudo` ou `terrain`. | `pseudo`, `terrain` (facultatif, query params)         | JSON : Liste des réservations avec `id`, `utilisateur`, `terrain`, `jour`, `creneau` |
-| **/terrains**                              | GET          | Liste tous les terrains.                                                  | Aucun                                                 | JSON : Liste des terrains avec `id`, `nom`, `actif` |
-| **/terrains/disponible**                   | GET          | Liste les terrains actifs (disponibles).                                  | Aucun                                                 | JSON : Liste des terrains actifs avec `id`, `nom`, `actif` |
-| **/terrain/disponible/{id}**               | PATCH        | Rend un terrain disponible (actif).                                       | `id` (ID du terrain)                                  | JSON : Message de confirmation ou d'erreur     |
-| **/terrain/indisponible/{id}**             | PATCH        | Rend un terrain indisponible (inactif).                                   | `id` (ID du terrain)                                  | JSON : Message de confirmation ou d'erreur     |
-| **/user**                                  | GET          | Récupère les informations de l'utilisateur authentifié.                   | Aucun                                                 | JSON : Détails de l'utilisateur avec `username`, `roles` |
-| **/user/roles**                            | GET          | Récupère les rôles de l'utilisateur authentifié.                          | Aucun                                                 | JSON : Liste des rôles de l'utilisateur       |
-| **/users/{pseudo}**                        | POST         | Crée un nouvel utilisateur avec un pseudo spécifié.                       | `pseudo` (pseudo de l'utilisateur)                    | JSON : Message de confirmation ou d'erreur     |
+| **/api/jours**                                 | GET          | Liste tous les jours disponibles.                                         | Aucun                                                 | JSON : Liste des jours avec `id` et `jour`    |
+| **/api/reservations/{id}**                     | GET          | Récupère une réservation par ID.                                          | `id` (ID de la réservation)                           | JSON : Détails de la réservation avec `id`, `utilisateur`, `terrain`, `jour`, `creneau` |
+| **/api/reservations**                          | POST         | Crée une nouvelle réservation.                                            | `pseudo`, `terrain`, `jour`, `creneau` (données JSON) | JSON : Message de confirmation ou d'erreur     |
+| **/api/reservations**                          | GET          | Liste toutes les réservations, avec possibilité de filtrer par `pseudo` ou `terrain`. | `pseudo`, `terrain` (facultatif, query params)         | JSON : Liste des réservations avec `id`, `utilisateur`, `terrain`, `jour`, `creneau` |
+| **/api/terrains**                              | GET          | Liste tous les terrains.                                                  | Aucun                                                 | JSON : Liste des terrains avec `id`, `nom`, `actif` |
+| **/api/terrains/disponible**                   | GET          | Liste les terrains actifs (disponibles).                                  | Aucun                                                 | JSON : Liste des terrains actifs avec `id`, `nom`, `actif` |
+| **/api/terrain/disponible/{id}**               | PATCH        | Rend un terrain disponible (actif).                                       | `id` (ID du terrain)                                  | JSON : Message de confirmation ou d'erreur     |
+| **/api/terrain/indisponible/{id}**             | PATCH        | Rend un terrain indisponible (inactif).                                   | `id` (ID du terrain)                                  | JSON : Message de confirmation ou d'erreur     |
+| **/api/user**                                  | GET          | Récupère les informations de l'utilisateur authentifié.                   | Aucun                                                 | JSON : Détails de l'utilisateur avec `username`, `roles` |
+| **/api/user/roles**                            | GET          | Récupère les rôles de l'utilisateur authentifié.                          | Aucun                                                 | JSON : Liste des rôles de l'utilisateur       |
+| **/api/users/{pseudo}**                        | POST         | Crée un nouvel utilisateur avec un pseudo spécifié.                       | `pseudo` (pseudo de l'utilisateur)                    | JSON : Message de confirmation ou d'erreur     |
 ---
 
 ## Sécurité
@@ -201,7 +201,10 @@ un jeton uniquement sur l'Admin.
 Mais c'est aussi un outils complexe qui m'a dait perdre pas mal de temps sur un projet aussi court.
 - Respect du format HAL notamment grâce à la librairie fos_rest.yaml.
 - Tentative pour résoudre la requête GraphlQL notamment avec la bibliothèque overblog_graphql mais infructeux.
-- Une documentation Swagger est intégrée pour faciliter l'exploration des endpoints API.
+- Une documentation Swagger est intégrée pour faciliter l'exploration des endpoints API grâce à la bibliothèque NelmioApiDocBundle:
+  http://localhost:8000/api/doc
+erreur possible selon l'installation j'ai tester sur plusieur pc et je n'ai réussi que sur un seul mais on peut voir les données:
+  http://localhost:8000/api/doc.json
 
 
 ---

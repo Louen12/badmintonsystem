@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CreneauHoraireController extends AbstractController
 {
-    #[Route('/creneaux/horaire', name: 'api_creneau_horaire_list')]
+    #[Route('/api/creneaux/horaire', name: 'api_creneau_horaire_list')]
     public function listCreneauxHoraires(CreneauHoraireRepository $creneauHoraireRepository): JsonResponse
     {
         // Récupérer tous les créneaux horaires
@@ -32,7 +32,7 @@ class CreneauHoraireController extends AbstractController
         return new JsonResponse($creneauxData, 200);
     }
 
-    #[Route('/creneaux/{jour}', name: 'api_creneaux_par_jour', methods: ['GET'])]
+    #[Route('/api/creneaux/{jour}', name: 'api_creneaux_par_jour', methods: ['GET'])]
     public function afficherCreneauxParJour(
         $jour, // Renommé pour correspondre à {jour} dans la route
         CreneauHoraireRepository $creneauRepository,
