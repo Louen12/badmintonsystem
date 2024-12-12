@@ -6,9 +6,10 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -20,6 +21,12 @@ class Utilisateur
 
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Reservation::class)]
     private Collection $reservations;
+
+    #[ORM\Column]
+    private ?bool $isAdmin = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $password = null;
 
     public function __construct()
     {
@@ -70,6 +77,49 @@ class Utilisateur
             }
         }
 
+        return $this;
+    }
+
+    // Implémentation de UserInterface
+    public function getRoles(): array
+    {
+        return $this->isAdmin ? ['ROLE_ADMIN'] : ['ROLE_USER'];
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->pseudo;
+    }
+
+    public function getSalt(): ?string
+    {
+        return null; // Pas nécessaire pour bcrypt
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Si tu stockes des données sensibles temporaires, nettoie-les ici
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(bool $isAdmin): self
+    {
+        $this->isAdmin = $isAdmin;
         return $this;
     }
 }

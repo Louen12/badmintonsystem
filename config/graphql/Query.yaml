@@ -1,0 +1,12 @@
+Query:
+  type: object
+  config:
+    fields:
+      availableSlots:
+        type: "[AvailableSlot]" # Tableau de résultats
+        args:
+          date:
+            type: "String!"
+          terrain:
+            type: "String!"
+        resolve: "@=resolver('App\\GraphQL\\AvailableSlotsResolver', [args])"

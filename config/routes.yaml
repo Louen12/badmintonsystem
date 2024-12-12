@@ -1,4 +1,20 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+controllers:
+  resource: ../src/Controller/
+  type: annotation
 
+kernel:
+  resource: ../src/Kernel.php
+  type: annotation
+
+api_login_check:
+  path: /api/login_check
+
+graphql:
+  path: /graphql
+  controller: Overblog\GraphQLBundle\Controller\GraphController::endpointAction
+  defaults:
+    _graphql: true
+
+graphiql:
+  path: /graphiql
+  controller: Overblog\GraphQLBundle\Controller\GraphController::graphiqlAction

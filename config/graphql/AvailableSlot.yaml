@@ -1,0 +1,8 @@
+AvailableSlot:
+  type: object
+  config:
+    fields:
+      time:
+        type: "String"
+      isAvailable:
+        type: "Boolean"

@@ -20,5 +20,11 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\GraphQL\AvailableSlotsResolver:
+        arguments:
+            $creneauHoraireRepository: '@App\Repository\CreneauHoraireRepository'
+            $reservationRepository: '@App\Repository\ReservationRepository'
+            $terrainRepository: '@App\Repository\TerrainRepository'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
