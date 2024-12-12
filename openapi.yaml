@@ -1,0 +1,24 @@
+paths:
+  /terrains:
+    get:
+      summary: Liste les terrains disponibles
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Terrain'
+components:
+  schemas:
+    Terrain:
+      type: object
+      properties:
+        id:
+          type: integer
+        nom:
+          type: string
+        actif:
+          type: boolean
